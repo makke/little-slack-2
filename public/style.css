@@ -1,0 +1,103 @@
+/* GENERAL */
+
+html, body {
+  height: 100%;
+}
+body {
+  background-color: #FFCC00;
+  padding: 20px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+h1, h2, p, ul, li {
+  font-family: Helvetica, Arial, sans-serif;
+}
+.container {
+  display:flex;
+}
+
+/* TOP NAVIGATION */
+
+header ul li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+}
+header ul {
+  background-color: #111;
+  padding: 0;
+}
+header ul li a {
+  color: #FFF;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 20px;
+  display: inline-block;
+}
+.active {
+  background-color: #0099FF;
+}
+
+/* FOOTER */
+
+footer {
+  background-color: #efefef;
+  text-align: center;
+  flex: 1 0 auto;
+  padding: 20px;
+}
+
+/* LEFT PANEL (NAVIGATION) */
+
+nav.sidebar {
+  flex-shrink:0;
+  height: 100%;
+  background-color: #efefef;
+  padding: 20px;
+}
+nav.sidebar ul {
+  padding: 0;
+}
+nav.sidebar ul li {
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+nav.sidebar ul li a {
+  text-decoration: none;
+  color: inherit;
+}
+li.listHeader {
+  font-weight: bold;
+}
+li.listHeader:first-letter {
+  text-transform:uppercase;
+}
+
+/* MAIN CONTENT */
+
+main {
+  background-color: #FFF;
+  padding: 20px;
+  flex-grow:1;
+}
+main h2 {
+  padding: 0;
+  margin: 0;
+}
+main li {
+  margin-bottom: 10px;
+}
+
+/* RESPONSIVE RULES */
+
+@media all and (max-width: 580px) {
+    .container {
+        flex-flow:column;
+    }
+
+    /* Make the sidebar take the entire width of the screen */
+    nav.sidebar {
+        width:auto;
+    }
+}

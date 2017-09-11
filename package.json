@@ -1,0 +1,28 @@
+{
+  "name": "react-app",
+  "version": "0.0.4",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.3",
+    "mongoose": "4.10.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.13"
+  },
+  "author": "Markus Norrena",
+  "scripts": {
+    "start-front": "react-scripts start",
+    "start-back": "node src/server.js",
+    "start": "npm-run-all -p start-back start-front",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.1"
+  }
+}
