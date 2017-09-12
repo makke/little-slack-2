@@ -1,5 +1,6 @@
 # WORK IN PROGRESS
 
+My notes:
 * Consider using React Bootstrap
 
 ## Little Slack
