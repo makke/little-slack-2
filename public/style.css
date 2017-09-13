@@ -28,6 +28,10 @@ header ul {
   background-color: #111;
   padding: 0;
 }
+li.navtext {
+  color: gray;
+  margin-left: 20px;
+}
 header ul li a {
   color: #FFF;
   font-weight: bold;
