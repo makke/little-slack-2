@@ -29,30 +29,44 @@ class GetData extends React.Component {
     }
 
     deleteVal() {
-      // alert(this);
       axios.delete('http://localhost:4200/api/users/' + this)
         .then().catch(err => console.log(err))
-      window.location.reload();
+      //window.location.reload();
+      //this.setState({rewrite: true},{action: "delete"});
+      // this.rewrite = true;
+      // this.action = "deleted";
     }
 
     handleChange(event) {
       this.setState({
         value: event.target.value
       });
+      // this.name = event.target.value;
     }
 
     handleSubmit(event) {
       event.preventDefault();
-      if (window.confirm('Want to to add user ' + this.state.value + '?')) {
+      if (window.confirm('Want to add user ' + this.state.value + '?')) {
         axios.post('http://localhost:4200/api/users/', {
             name: this.state.value
           })
           .catch(err => console.log(err))
-        window.location.reload();
+        //window.location.reload();
+        // this.setState({rewrite: true})
+        // this.action = "added";
       }
     }
 
     render() {
+      // if (this.state.rewrite) {
+      //   this.setState({rewrite: false})
+      //   return (
+      //     <div>
+      //       <h1>{`All our ${this.props.getwhat}`}</h1>
+      //       <p>User {this.name} {this.action}</p>
+      //     </div>
+      //   );
+      // }
       return (
         <div>
           <h1>{`All our ${this.props.getwhat}`}</h1>
@@ -72,7 +86,7 @@ class GetData extends React.Component {
         </div>
       );
     }
-  }
+}
 
 
 const User = () => (

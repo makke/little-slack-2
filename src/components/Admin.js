@@ -1,10 +1,26 @@
-import React from 'react'
+import React from 'react';
 
-const Admin = () => (
-  <div>
-    Logout<br />
-    Switch user
-  </div>
-)
+class Admin extends React.Component {
+
+  constructor() {
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+
+  handleSubmit(event) {
+    event.preventDefault();
+    window.location.reload(); // In Practice Logout
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input type="submit" value="Logout" />
+      </form>
+    );
+  }
+}
+
 
 export default Admin

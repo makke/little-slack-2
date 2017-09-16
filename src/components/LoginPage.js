@@ -21,6 +21,8 @@ class LoginPage extends React.Component {
     this.handleChange2 = this.handleChange2.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
+    this.toggleLogin = this.props.toggleLogin.bind(this);
+
     //alert (JSON.stringify(this.props));
     //alert (this.props.location.state.message);
   }
@@ -45,26 +47,25 @@ class LoginPage extends React.Component {
   }
 
   handleSubmit(event) {
-    // event.preventDefault();
+    event.preventDefault();
     // CHECK FOR DUPLICATES - ALREADY EXISTS ??
     axios.post('http://localhost:4200/api/users/', {
         name: this.state.value
       })
       .catch(err => console.log(err));
-    // window.location.reload();
     // Set Username & Logged in
-    this.props.toggleLogin(this.state.value);
+    this.toggleLogin(this.state.value);
   }
 
   handleChoice(event) {
-    // event.preventDefault();
+    event.preventDefault();
 
     let _this = this;
     _this.setState({redirect: true});
     this.setState({userName: this.state.value})
 
     // Set Username & Logged in
-    this.props.toggleLogin(this.state.userList);
+    this.toggleLogin(this.state.userList);
   }
 
   render() {
@@ -86,7 +87,7 @@ class LoginPage extends React.Component {
               {this.state.redirect &&
              <Redirect to={{
               pathname: '/',
-              state: {from: this.state.userName } //this.state.value
+              state: {from: this.state.userName }
             }} />
             }
           </form>
