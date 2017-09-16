@@ -1,8 +1,5 @@
 # WORK IN PROGRESS
 
-My notes:
-* Consider using React Bootstrap
-
 ## Little Slack
 
 * My very first MERN -project, done for learning.
@@ -28,3 +25,7 @@ My notes:
 * Frontend will be as an default on http://localhost:3000/
 * Backend will be as an default on http://localhost:4200/
 * REST api can be found from http://localhost:4200/api/
+
+## Future Development
+
+* Consider using React Bootstrap?

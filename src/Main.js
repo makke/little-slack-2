@@ -12,7 +12,7 @@ import NotFound from './components/NotFound'
 
 class Main extends React.Component {
 
-  TellUs = () => {
+  LoggedIn = () => {
     return this.props.isLoggedIn;
   };
 
@@ -23,12 +23,12 @@ class Main extends React.Component {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/users' render={() => (
-              this.TellUs()
+              this.LoggedIn()
               ? (<User/>)
               : (<Redirect to="/login"/>))
             } />
           <Route path='/rooms' render={() => (
-              this.TellUs()
+              this.LoggedIn()
               ? (<Room/>)
               : (<Redirect to="/login"/>))
             } />

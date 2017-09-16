@@ -1,10 +1,105 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 
-const LoginPage = () => (
-  <div>
-    Choose user from list or<br />
-    Add new username
-  </div>
-)
+import { Redirect } from 'react-router'
+
+
+
+class LoginPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+      isLoggedIn: false,
+      userName: "",
+      redirect: false,
+      getwhat: "users"
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChange2 = this.handleChange2.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+    //alert (JSON.stringify(this.props));
+    //alert (this.props.location.state.message);
+  }
+
+  componentDidMount() {
+    axios.get(`http://localhost:4200/api/${this.state.getwhat}`).then(res => {
+      //{alert(JSON.stringify(res.data))}
+      const posts = Array.from(res.data);
+      //const posts = res.data.map(obj => obj.data);
+      this.setState({posts});
+    }).catch(function(error) {
+      console.log(error);
+    })
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleChange2(event) {
+    this.setState({userList: event.target.value});
+  }
+
+  handleSubmit(event) {
+    // event.preventDefault();
+    // CHECK FOR DUPLICATES - ALREADY EXISTS ??
+    axios.post('http://localhost:4200/api/users/', {
+        name: this.state.value
+      })
+      .catch(err => console.log(err));
+    // window.location.reload();
+    // Set Username & Logged in
+    this.props.toggleLogin(this.state.value);
+  }
+
+  handleChoice(event) {
+    // event.preventDefault();
+
+    let _this = this;
+    _this.setState({redirect: true});
+    this.setState({userName: this.state.value})
+
+    // Set Username & Logged in
+    this.props.toggleLogin(this.state.userList);
+  }
+
+  render() {
+    return (
+      <main>
+        <h1>Please log in</h1>
+        <h2>Choose your user from our list</h2>
+        <p>
+          <form>
+            <select name="userList" value={this.state.userList} onChange={this.handleChange2}>
+              {
+                this.state.posts.map(post =>
+                <option key={post._id} value={post.name}>
+                  {post.name}
+                </option>)
+              }
+            </select>
+            <input type="submit" value="Submit" onClick={this.handleChoice.bind(this)} />
+              {this.state.redirect &&
+             <Redirect to={{
+              pathname: '/',
+              state: {from: this.state.userName } //this.state.value
+            }} />
+            }
+          </form>
+        </p>
+        <h2>or add a new user to the list</h2>
+        <p><form onSubmit={this.handleSubmit}>
+          <input type="text" name="freeInput" value={this.state.value} onChange={this.handleChange} placeholder="Give new username" />
+          <input type="submit" value="Submit" />
+        </form></p>
+      </main>
+    );
+  }
+}
+
 
 export default LoginPage

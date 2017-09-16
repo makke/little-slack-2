@@ -75,8 +75,8 @@ class GetData extends React.Component {
   }
 
 
-const User = () => ( <
-  GetData getwhat = "users" / >
+const User = () => (
+  <GetData getwhat = "users" / >
 )
 
 
