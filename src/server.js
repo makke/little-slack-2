@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 // Connect to the backend, MongoDB
-mongoose.connect('mongodb://localhost:27017/lsbackend');
+mongoose.connect('mongodb://localhost:27017/lsbackend2');
 
 // Create our Express application
 const app = express();
@@ -49,6 +49,11 @@ app.use('/api/', user)
 // Register room routes
 const room = require('./controllers/roomsRouter.js')
 app.use('/api/', room)
+
+// Register message routes
+const message = require('./controllers/messageRouter.js')
+app.use('/api/', message)
+
 
 // Start the server
 app.listen(port);

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => (
   <footer>
-    footer
+    [little slack]
   </footer>
 )
 

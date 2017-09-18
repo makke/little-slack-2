@@ -27,22 +27,20 @@ router.post('/rooms', function(req, res) {
 
   // Set the room properties that came from the POST data
   room.name = req.body.name;
-  room.type = req.body.type;
-  room.quantity = req.body.quantity;
 
   // Save the room and check for errors
   room.save(function(err) {
     if (err)
       res.send(err);
 
-      res.json({ message: 'Room added to the locker!', data: room });
+      res.json({ message: 'Room added !', data: room });
     });
   });
 
 
 // Create endpoint /api/rooms/:room_id for GET
 router.get('/rooms/:room_id', function(req, res) {
-  // Use the Room model to find a specific room
+  // Use the Room model to find rooms
   Room.findById(req.params.room_id, function(err, room) {
     if (err)
       res.send(err);
@@ -59,8 +57,8 @@ router.put('/rooms/:room_id', function(req, res) {
     if (err)
       res.send(err);
 
-    // Update the existing room quantity
-    room.quantity = req.body.quantity;
+    // Update values
+    room.name = req.body.name;
 
     // Save the room and check for errors
     room.save(function(err) {
@@ -80,7 +78,7 @@ router.delete('/rooms/:room_id', function(req, res) {
     if (err)
       res.send(err);
 
-    res.json({ message: 'Room removed from the locker!' });
+    res.json({ message: 'Room removed!' });
   });
 });
 

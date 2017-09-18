@@ -43,6 +43,7 @@ class LoginPage extends React.Component {
   }
 
   handleChange2(event) {
+    // Ei kutsuta jos käyttäjä valitsee ensimmäisen oletusnimen listalta *virhe*
     this.setState({userList: event.target.value});
   }
 
@@ -73,30 +74,28 @@ class LoginPage extends React.Component {
       <main>
         <h1>Please log in</h1>
         <h2>Choose your user from our list</h2>
-        <p>
-          <form>
-            <select name="userList" value={this.state.userList} onChange={this.handleChange2}>
-              {
-                this.state.posts.map(post =>
-                <option key={post._id} value={post.name}>
-                  {post.name}
-                </option>)
-              }
-            </select>
-            <input type="submit" value="Submit" onClick={this.handleChoice.bind(this)} />
-              {this.state.redirect &&
-             <Redirect to={{
-              pathname: '/',
-              state: {from: this.state.userName }
-            }} />
+        <form>
+          <select name="userList" value={this.state.userList} onChange={this.handleChange2}>
+            {
+              this.state.posts.map(post =>
+              <option key={post._id} value={post.name}>
+                {post.name}
+              </option>)
             }
-          </form>
-        </p>
+          </select>
+          <input type="submit" value="Submit" onClick={this.handleChoice.bind(this)} />
+            {this.state.redirect &&
+           <Redirect to={{
+            pathname: '/',
+            state: {from: this.state.userName }
+          }} />
+          }
+        </form><br/>
         <h2>or add a new user to the list</h2>
-        <p><form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <input type="text" name="freeInput" value={this.state.value} onChange={this.handleChange} placeholder="Give new username" />
           <input type="submit" value="Submit" />
-        </form></p>
+        </form><br/>
       </main>
     );
   }

@@ -15,7 +15,7 @@ function LoggedIn(props) {
           <Header isLoggedIn={isLoggedIn} userName={userName} />
           <div className="container">
             <Sidebar />
-            <Main isLoggedIn={isLoggedIn} />;
+            <Main isLoggedIn={isLoggedIn} userName={userName} />
           </div>
           <Footer />
         </div>
@@ -30,7 +30,7 @@ class App extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-        isLoggedIn: false,  // User is not logged in at start
+        isLoggedIn: true,  // User is not logged in at start
         userName: "Markus"
       };
       this.toggleLogin = this.toggleLogin.bind(this)

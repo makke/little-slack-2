@@ -28,4 +28,6 @@
 
 ## Future Development
 
+* Move all database action to the backend, it's leaking to the front
+* Split code up to more general service components, to make it more DRY
 * Consider using React Bootstrap?

@@ -12,6 +12,11 @@ import NotFound from './components/NotFound'
 
 class Main extends React.Component {
 
+
+  constructor(props) {
+    super(props);
+  }
+
   LoggedIn = () => {
     return this.props.isLoggedIn;
   };
@@ -29,10 +34,10 @@ class Main extends React.Component {
             } />
           <Route path='/rooms' render={() => (
               this.LoggedIn()
-              ? (<Room/>)
+              ? (<Room userName={this.props.userName} />)
               : (<Redirect to="/login"/>))
             } />
-          <Route path='/admin' component={Admin} />
+          <Route path='/admin' render={() => <Admin isLoggedIn={this.props.isLoggedIn} />} />
           <Route path='/login' component={LoginPage} />
           <Route path="*" component={NotFound} />
         </Switch>

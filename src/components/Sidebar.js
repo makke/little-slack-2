@@ -29,7 +29,7 @@ class GetUsers extends React.Component {
       <div>
 
           <ul>
-            <li className="listHeader"><Link to={this.props.subwhat}>{this.props.subwhat}</Link></li>
+            <li className="listHeader"><Link to={"/"+this.props.subwhat}>{this.props.subwhat}</Link></li>
             {
               this.state.posts.map(post =>
               <li key={post._id}><Link to={"/"+this.props.subwhat+"/"+post._id}>{post.name}</Link></li>)
