@@ -30,8 +30,8 @@ class App extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-        isLoggedIn: true,  // User is not logged in at start
-        userName: "Markus"
+        isLoggedIn: false,  // User is not logged in at start
+        userName: ""
       };
       this.toggleLogin = this.toggleLogin.bind(this)
   }

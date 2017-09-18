@@ -11,7 +11,6 @@ class GetData extends React.Component {
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-
       this.deleteVal = this.deleteVal.bind(this);
     }
 
@@ -73,7 +72,7 @@ class GetData extends React.Component {
     render() {
       return (
         <div>
-          <h1>{`All our ${this.props.getwhat}`}</h1>
+          <h1>{'All our '+this.props.getwhat}</h1>
           <ul>
             {
               this.state.posts.map(post =>

@@ -11,6 +11,7 @@ class GetData extends React.Component {
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.deleteVal = this.deleteVal.bind(this);
     }
 
     componentDidMount() {
@@ -28,11 +29,19 @@ class GetData extends React.Component {
         })
     }
 
-    deleteVal() {
-      // alert(this);
-      axios.delete('http://localhost:4200/api/rooms/' + this)
-        .then().catch(err => console.log(err))
-      window.location.reload();
+    deleteVal(postID) {
+      axios.delete('http://localhost:4200/api/rooms/' + postID)
+        .then((res) => {
+          // we should update the state after response...
+          let posts = this.state.posts;
+          console.log(JSON.stringify(posts));
+          let index = posts.findIndex(x => x._id==postID);
+          posts.splice(index, 1);
+          this.setState({
+            posts
+          });
+        })
+        .catch(err => console.log(err))
     }
 
     handleChange(event) {
@@ -60,14 +69,15 @@ class GetData extends React.Component {
     render() {
       return (
         <div>
-          <h1>{`All our ${this.props.getwhat}`}</h1>
+          <h1>{'All our '+this.props.getwhat}</h1>
           <ul>
             {
               this.state.posts.map(post =>
               <li key={post._id}>
                 {post.name}
-                <button onClick={this.deleteVal.bind(post._id)} >
-                Delete</button>
+                  <button onClick={() => { this.deleteVal(post._id) }}>
+                    Delete
+                  </button>
               </li>)
             }
           </ul>
