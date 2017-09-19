@@ -34,14 +34,6 @@ router.get('/', function(req, res) {
 // Register all our routes with /api
 app.use('/api', router);
 
-// TESTING
-const wiki = require('./controllers/wiki.js')
-app.use('/api/wiki', wiki)
-
-// TESTING
-const beer = require('./controllers/beers.js')
-app.use('/api/', beer)
-
 // Register user routes
 const user = require('./controllers/usersRouter.js')
 app.use('/api/', user)

@@ -58,8 +58,8 @@ class RoomAPI extends React.Component {
       // alert('this.state.value: '+this.state.value+', this.state.userID: '+this.state.userID);
       axios.post(url, {
           text: this.state.value,
-          author_id: this.state.userID
-          // target: this.props.roomID
+          author_id: this.state.userID,
+          target: this.props.roomID
         })
         .then( data => {
           // console.log(data.data.data)
@@ -133,33 +133,3 @@ class OneRoom extends React.Component {
 
 
 export default OneRoom
-
-
-///////////////////////////////////////
-
-    // setUsername(post, userID) {
-    //   axios.get('http://localhost:4200/api/users/'+userID, {
-    //     params: {
-    //       id: userID
-    //     }
-    //   })
-    //   .then(res => {
-    //     // If there is no match? Set name = "anonymous"
-    //     // if ('name' in res.data) {this.setState({userName: res.data.name});}
-    //     // else {this.setState({userName: "anonymous"});}
-    //     // we should update the state after response...
-    //     let posts = this.state.posts;
-    //     // console.log(JSON.stringify(posts));
-    //     // alert(JSON.stringify(posts));
-    //     let index = posts.findIndex(x => x._id==userID);
-    //     // alert(index);
-    //     if (index==-1) { this.setState({userName: "anonymous"}); }
-    //       else {this.setState({userName: res.data.name});}
-    //     // alert(this.state.userName);
-    //     // console.log(JSON.stringify(posts));
-    //     console.log(res)
-    //     post.userName = res.data.name})
-    //   .catch(function (error) {
-    //       console.log(error);
-    //   });
-    // }
