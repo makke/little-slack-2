@@ -8,7 +8,8 @@ class RoomAPI extends React.Component {
       super(props);
       this.state = {
         posts: [],    // all the messages
-        roomName: ""  // current room
+        roomName: "",  // current room
+        userID: "", // current user _id
       };
 
       this.handleChange = this.handleChange.bind(this);
@@ -16,6 +17,9 @@ class RoomAPI extends React.Component {
       this.setRoomName = this.setRoomName.bind(this);
 
       this.setRoomName(this.props.roomID);
+      this.setUserID(this.props.userName);
+
+      // Add a timer to update state (refresh chat) regularly
     }
 
     componentDidMount() {
@@ -51,18 +55,19 @@ class RoomAPI extends React.Component {
     handleSubmit(event) {
       event.preventDefault();
       let url='http://localhost:4200/api/rooms/'+this.props.roomID+'/messages';
-      alert('this.state.value: '+this.state.value+', this.props.userID: '+this.props.userID);
-      // axios.post(url, {
-      //     text: this.state.value,
-      //     author_id: "59be4db95b4d656e3661f6a2"  // change to props.userName or something..
-      //     // target: this.props.roomID
-      //   })
-      //   .then( data => {
-      //     this.setState({
-      //       posts: this.state.posts.concat(data.data.data)
-      //     });
-      //   })
-      //   .catch(err => console.log(err))
+      // alert('this.state.value: '+this.state.value+', this.state.userID: '+this.state.userID);
+      axios.post(url, {
+          text: this.state.value,
+          author_id: this.state.userID
+          // target: this.props.roomID
+        })
+        .then( data => {
+          // console.log(data.data.data)
+          this.setState({
+            posts: this.state.posts.concat(data.data.data) // also concat this.props.userName
+          });
+        })
+        .catch(err => console.log(err))
     }
 
     setRoomName(roomID) {
@@ -79,6 +84,16 @@ class RoomAPI extends React.Component {
       });
     }
 
+    setUserID(userName) {
+      axios.get('http://localhost:4200/api/user/'+userName)
+      .then(res => {
+        this.setState({userID: res.data._id});
+      })
+      .catch(function (error) {
+          console.log(error);
+      });
+    }
+
     render() {
       return (
         <div>
@@ -87,7 +102,6 @@ class RoomAPI extends React.Component {
             {
               this.state.posts.map(post =>
               <li key={post._id}>
-                {post.name}
                 [{post.author.name}] {post.text}
               </li>)
             }
@@ -101,38 +115,27 @@ class RoomAPI extends React.Component {
 }
 
 
-const OneRoom = (props) => (
-    <div>
-      <RoomAPI roomID = {props.match.params.number} userID = {"59c0a2253350da46bbd6f2a4"} />
-    </div>
-)
+class OneRoom extends React.Component {
+
+  constructor(props) {
+    super(props);
+    // console.log(JSON.stringify(this.props));
+  }
+
+  render() {
+    return (
+      <div>
+        <RoomAPI roomID = {this.props.match.params.number} userName = {this.props.userName} />
+      </div>
+    );
+  }
+}
 
 
 export default OneRoom
 
 
-
-//////////////////////////////////////////////////////////////////////
-
-
-// class Row extends React.Component {
-//
-//   constructor(props) {
-//     super(props);
-//   }
-//
-//   render() {
-//     return (
-//       <div>
-//         <ul>
-//           <li>
-//               - [{this.props.userName}] {this.props.text}
-//           </li>
-//         </ul>
-//       </div>
-//     )
-//   }
-// }
+///////////////////////////////////////
 
     // setUsername(post, userID) {
     //   axios.get('http://localhost:4200/api/users/'+userID, {

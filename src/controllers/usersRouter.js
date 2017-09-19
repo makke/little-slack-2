@@ -51,6 +51,17 @@ router.get('/users/:user_id', function(req, res) {
     });
   });
 
+  // Create endpoint /api/user/:user_name for GET
+  router.get('/user/:user_name', function(req, res) {
+    // Use the User model to find a specific user
+    User.findOne({name : req.params.user_name}, function(err, user) {
+      if (err)
+        res.send(err);
+
+        res.json(user);
+      });
+    });
+
 
 // Create endpoint /api/users/:user_id for PUT
 router.put('/users/:user_id', function(req, res) {

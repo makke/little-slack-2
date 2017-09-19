@@ -6,12 +6,18 @@ import OneRoom from './OneRoom'
 // This component matches one of two different routes
 // depending on the full pathname
 class Room extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // alert(this.props.userName);
+  }
 
   render() {
     return (
     <Switch>
       <Route exact path='/rooms' component={AllRooms}/>
-      <Route path='/rooms/:number' component={OneRoom} />
+      <Route path='/rooms/:number' render={(props) => <OneRoom {...this.props} {...props} />} />
+
       { // TEST THIS:
       //   <Link
       //     to={{
