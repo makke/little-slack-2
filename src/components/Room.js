@@ -6,9 +6,6 @@ import OneRoom from './OneRoom'
 // This component matches one of two different routes
 // depending on the full pathname
 class Room extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (

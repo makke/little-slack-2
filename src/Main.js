@@ -12,11 +12,6 @@ import NotFound from './components/NotFound'
 
 class Main extends React.Component {
 
-
-  constructor(props) {
-    super(props);
-  }
-
   LoggedIn = () => {
     return this.props.isLoggedIn;
   };
