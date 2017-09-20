@@ -35,5 +35,4 @@
 * Fix refresh problem with sidebar
 * Prevent duplicate entries where needed
 * Messages by deleted users cause error
-* Choosing first item on list does not trigger the change event
 * Consider using React Bootstrap?

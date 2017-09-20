@@ -65,7 +65,8 @@ class LoginPage extends React.Component {
     this.setState({userName: this.state.value})
 
     // Set Username & Logged in
-    this.toggleLogin(this.state.userList);
+    if (this.state.userList==null){this.toggleLogin(this.state.posts[0].name);}
+    else (this.toggleLogin(this.state.userList));
   }
 
   render() {
