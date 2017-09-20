@@ -10,6 +10,7 @@ class RoomAPI extends React.Component {
         posts: [],    // all the messages
         roomName: "",  // current room
         userID: "", // current user _id
+        value: ""
       };
 
       this.handleChange = this.handleChange.bind(this);
@@ -115,11 +116,6 @@ class RoomAPI extends React.Component {
 
 
 class OneRoom extends React.Component {
-
-  constructor(props) {
-    super(props);
-    // console.log(JSON.stringify(this.props));
-  }
 
   render() {
     return (

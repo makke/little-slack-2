@@ -6,7 +6,8 @@ class GetData extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        posts: []
+        posts: [],
+        value: ""
       };
 
       this.handleChange = this.handleChange.bind(this);
@@ -34,8 +35,8 @@ class GetData extends React.Component {
         .then((res) => {
           // we should update the state after response...
           let posts = this.state.posts;
-          console.log(JSON.stringify(posts));
-          let index = posts.findIndex(x => x._id==postID);
+          // console.log(JSON.stringify(posts));
+          let index = posts.findIndex(x => x._id===postID);
           posts.splice(index, 1);
           // console.log(JSON.stringify(posts));
           this.setState({
