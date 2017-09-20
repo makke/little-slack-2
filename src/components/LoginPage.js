@@ -29,7 +29,6 @@ class LoginPage extends React.Component {
 
   componentDidMount() {
     axios.get(`http://localhost:4200/api/${this.state.getwhat}`).then(res => {
-      //{alert(JSON.stringify(res.data))}
       const posts = Array.from(res.data);
       //const posts = res.data.map(obj => obj.data);
       this.setState({posts});

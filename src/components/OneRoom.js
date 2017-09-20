@@ -55,7 +55,6 @@ class RoomAPI extends React.Component {
     handleSubmit(event) {
       event.preventDefault();
       let url='http://localhost:4200/api/rooms/'+this.props.roomID+'/messages';
-      // alert('this.state.value: '+this.state.value+', this.state.userID: '+this.state.userID);
       axios.post(url, {
           text: this.state.value,
           author_id: this.state.userID,
@@ -98,7 +97,7 @@ class RoomAPI extends React.Component {
       return (
         <div>
           <h1>{this.state.roomName} Room</h1>
-          <ul>
+          <ul className="chatflow">
             {
               this.state.posts.map(post =>
               <li key={post._id}>

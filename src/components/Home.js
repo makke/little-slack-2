@@ -7,11 +7,6 @@ class Home extends React.Component {
         this.state = {
             posts: []
         };
-        //this.handler = this.props.handler.bind(this)
-        // alert (JSON.stringify(this.props)); // this.props.isLoggedIn // .userName
-        // alert(this.props.location.state.from);
-        //if (this.props.location.state.from) {this.props.handler();}
-        // this.props.handler("kukkuu");
     }
 
     render() {

@@ -20,7 +20,6 @@ class FetchData {
 
 
   function getIt() {
-    alert("hep");
     axios.get(`http://localhost:4200/api/${this.props.getwhat}`)
       .then(res => {
         {alert(JSON.stringify(res.data))}

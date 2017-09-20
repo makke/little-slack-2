@@ -93,6 +93,9 @@ main h2 {
 main li {
   margin-bottom: 10px;
 }
+.chatflow {
+    list-style: none; /* Remove list bullets */
+}
 
 /* RESPONSIVE RULES */
 
