@@ -61,10 +61,12 @@ class GetData extends React.Component {
             name: this.state.value
           })
           .then( data => {
-            // debugger
-            this.setState({
-              posts: this.state.posts.concat(data.data.data)
-            });
+            if (data.data.hasOwnProperty('errmsg')) {alert("Sorry: "+data.data.errmsg)}
+            else {
+              this.setState({
+                posts: this.state.posts.concat(data.data.data)
+              });
+            }
           })
           .catch(err => console.log(err))
       }

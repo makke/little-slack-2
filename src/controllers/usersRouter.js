@@ -32,13 +32,13 @@ router.post('/users', function(req, res) {
 
   // Save the user and check for errors
   user.save(function(err) {
-    if (err)
-      res.send(err);
-
-      res.json({ message: 'User added to the locker!', data: user });
+      if (err) {
+        res.send(err);
+      } else {
+        res.json({ message: 'User added !', data: user });
+      }
     });
   });
-
 
 // Create endpoint /api/users/:user_id for GET
 router.get('/users/:user_id', function(req, res) {

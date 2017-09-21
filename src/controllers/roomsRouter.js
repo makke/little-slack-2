@@ -30,10 +30,11 @@ router.post('/rooms', function(req, res) {
 
   // Save the room and check for errors
   room.save(function(err) {
-    if (err)
-      res.send(err);
-
-      res.json({ message: 'Room added !', data: room });
+      if (err) {
+        res.send(err);
+      } else {
+        res.json({ message: 'Room added !', data: room });
+      }
     });
   });
 

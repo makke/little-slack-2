@@ -33,6 +33,5 @@
 * Split code up to more general service components, to make it more DRY
 * Comment the code better
 * Fix refresh problem with sidebar
-* Prevent duplicate entries where needed
 * Messages by deleted users cause error
 * Consider using React Bootstrap?
