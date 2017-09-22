@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 // Connect to the backend, MongoDB
-mongoose.connect('mongodb://localhost:27017/lsbackend7');
+mongoose.connect('mongodb://localhost:27017/lsbackend');
 
 // Create our Express application
 const app = express();

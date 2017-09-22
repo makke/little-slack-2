@@ -14,7 +14,8 @@ class LoginPage extends React.Component {
       isLoggedIn: false,
       userName: "",
       redirect: false,
-      getwhat: "users"
+      getwhat: "users",
+      value: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -48,13 +49,17 @@ class LoginPage extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // CHECK FOR DUPLICATES - ALREADY EXISTS ??
     axios.post('http://localhost:4200/api/users/', {
         name: this.state.value
       })
-      .catch(err => console.log(err));
-    // Set Username & Logged in
-    this.toggleLogin(this.state.value);
+      .then( data => {
+        if (data.data.hasOwnProperty('errmsg')) {alert("Sorry: "+data.data.errmsg)}
+        else {
+          // Set Username & Logged in
+          this.toggleLogin(this.state.value);
+        }
+      })
+      .catch(err => console.log(err))
   }
 
   handleChoice(event) {
