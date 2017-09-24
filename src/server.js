@@ -1,14 +1,25 @@
+// server.js The routing and Mongoose back end
+
 // Load required packages
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const http = require("http");
+const express = require("express");
+const cors = require("cors");
+const io = require("socket.io");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+
+// Implement later, put ports here:
+//import config from '../config/config.json';
 
 // Connect to the backend, MongoDB
 mongoose.connect('mongodb://localhost:27017/lsbackend');
 
 // Create our Express application
 const app = express();
+
+// Setup server
+const server = http.createServer(app);
+const socketIo = io(server);
 
 // cross origin (domain) requests
 app.use(cors());
@@ -50,3 +61,20 @@ app.use('/api/', message)
 // Start the server
 app.listen(port);
 console.log('Backend listening on port ' + port);
+
+// Setup socket.io
+socketIo.on('connection', socket => {
+  const username = socket.handshake.query.username;
+  console.log(`${username} connected`);
+
+  socket.on('client:message', data => {
+    console.log(`${data.username}: ${data.message}`);
+
+    // message received from client, now broadcast it to everyone else
+    socket.broadcast.emit('server:message', data);
+  });
+
+  socket.on('disconnect', () => {
+    console.log(`${username} disconnected`);
+  });
+});

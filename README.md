@@ -2,7 +2,9 @@
 
 ## Little Slack
 
-* My very first MERN -project, done for learning purposes.
+* My very first MERN -project, done for learning purposes (ie. MongoDB, Express, React and Node).
+
+* I use Socket.IO for the real-time mesaaging
 
 * This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
@@ -17,14 +19,16 @@
 
 ## Separate Starting Commands
 
-* "npm start" will start both front- and backend
-* "node src/server.js" will start only backend
+* "npm start" will start both the front end and all the back end servers
+* "node src/server.js" will start only routing backend
+* "node src/io-server.js" will start only socket.io backend
 
 ## Default ports and REST API
 
 * Frontend will be as an default on http://localhost:3000/
 * Backend will be as an default on http://localhost:4200/
 * REST api can be found from http://localhost:4200/api/
+* Socket.IO can be found at http://localhost:4008/
 
 ## Future Development - TODO
 

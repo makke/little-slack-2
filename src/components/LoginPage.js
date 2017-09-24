@@ -43,7 +43,6 @@ class LoginPage extends React.Component {
   }
 
   handleChange2(event) {
-    // Ei kutsuta jos käyttäjä valitsee ensimmäisen oletusnimen listalta *virhe*
     this.setState({userList: event.target.value});
   }
 

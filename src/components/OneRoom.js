@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import io from 'socket.io-client';
 
 class RoomAPI extends React.Component {
 
@@ -13,6 +13,9 @@ class RoomAPI extends React.Component {
         value: ""
       };
 
+      // Connect to the socket.io server
+      this.socket = io('http://localhost:4008').connect();
+
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.setRoomName = this.setRoomName.bind(this);
@@ -20,10 +23,17 @@ class RoomAPI extends React.Component {
       this.setRoomName(this.props.roomID);
       this.setUserID(this.props.userName);
 
-      // Add a timer to update state (refresh chat) regularly
+      // Listen for socket.io messages from the server
+      this.socket.on('server:message', message => {
+        const posts = this.state.posts;
+        posts.push(message);
+        // console.log(posts);
+        this.setState({ posts });
+      });
     }
 
     componentDidMount() {
+      // Get all the messages for this room
       let url='http://localhost:4200/api/rooms/'+this.props.roomID+'/messages';
       axios.get(url)
         .then(res => {
@@ -44,6 +54,7 @@ class RoomAPI extends React.Component {
         .catch(function(error) {
           console.log(error);
         })
+
     }
 
     handleChange(event) {
@@ -55,6 +66,17 @@ class RoomAPI extends React.Component {
 
     handleSubmit(event) {
       event.preventDefault();
+      // let make a socket.io message
+      const messageObject = {
+        text: this.state.value,
+        author_id: this.state.userID,
+        author: {name: this.props.userName},
+        target: this.props.roomID
+      };
+      // Emit the message to Socket.io
+      this.socket.emit('client:message', messageObject);
+      messageObject.fromMe = true; // Unneccessary??
+      // Send another message to to MongoDB
       let url='http://localhost:4200/api/rooms/'+this.props.roomID+'/messages';
       axios.post(url, {
           text: this.state.value,

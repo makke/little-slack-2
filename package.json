@@ -11,13 +11,15 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.13"
+    "react-scripts": "1.0.13",
+    "socket.io": "^2.0.3"
   },
   "author": "Markus Norrena",
   "scripts": {
     "start-front": "react-scripts start",
     "start-back": "node src/server.js",
-    "start": "npm-run-all -p start-back start-front",
+    "start-io": "node src/io-server.js",
+    "start": "npm-run-all -p start-back start-front start-io",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
