@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 
+// Get ports from a config file
+const config = require("../config/config.json");
+
 class GetData extends React.Component {
 
     constructor(props) {
@@ -16,7 +19,7 @@ class GetData extends React.Component {
     }
 
     componentDidMount() {
-      axios.get('http://localhost:4200/api/' + this.props.getwhat)
+      axios.get(config.APIroot + this.props.getwhat)
         .then(res => {
           //{alert(JSON.stringify(res.data))}
           const posts = Array.from(res.data);
@@ -31,7 +34,7 @@ class GetData extends React.Component {
     }
 
     deleteVal(postID) {
-      axios.delete('http://localhost:4200/api/rooms/' + postID)
+      axios.delete(config.APIroot+'rooms/' + postID)
         .then((res) => {
           // we should update the state after response...
           let posts = this.state.posts;
@@ -54,7 +57,7 @@ class GetData extends React.Component {
     handleSubmit(event) {
       event.preventDefault();
       if (window.confirm('Want to to add room ' + this.state.value + '?')) {
-        axios.post('http://localhost:4200/api/rooms/', {
+        axios.post(config.APIroot + 'rooms/', {
             name: this.state.value
           })
           .then( data => {

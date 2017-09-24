@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import { Redirect } from 'react-router'
 
+// Get ports from a config file
+const config = require("../config/config.json");
 
 
 class LoginPage extends React.Component {
@@ -29,7 +31,8 @@ class LoginPage extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:4200/api/${this.state.getwhat}`).then(res => {
+    axios.get(config.APIroot + this.state.getwhat)
+    .then(res => {
       const posts = Array.from(res.data);
       //const posts = res.data.map(obj => obj.data);
       this.setState({posts});
@@ -48,7 +51,7 @@ class LoginPage extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    axios.post('http://localhost:4200/api/users/', {
+    axios.post(config.APIroot + 'users/', {
         name: this.state.value
       })
       .then( data => {

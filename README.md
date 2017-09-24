@@ -25,6 +25,7 @@
 
 ## Default ports and REST API
 
+* You can change these ports in config/config.json
 * Frontend will be as an default on http://localhost:3000/
 * Backend will be as an default on http://localhost:4200/
 * REST api can be found from http://localhost:4200/api/

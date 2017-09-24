@@ -2,6 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import io from 'socket.io-client';
 
+// Get ports from a config file
+const config = require("../config/config.json");
+
 class RoomAPI extends React.Component {
 
     constructor(props) {
@@ -14,7 +17,7 @@ class RoomAPI extends React.Component {
       };
 
       // Connect to the socket.io server
-      this.socket = io('http://localhost:4008').connect();
+      this.socket = io(config.IOroot).connect();
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,14 +32,14 @@ class RoomAPI extends React.Component {
         // Let's add a fake id only for <li key>
         message._id = 'fake_'+(Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8));
         posts.push(message);
-        console.log(posts);
+        // console.log(posts);
         this.setState({ posts });
       });
     }
 
     componentDidMount() {
       // Get all the messages for this room
-      let url='http://localhost:4200/api/rooms/'+this.props.roomID+'/messages';
+      let url=config.APIroot + 'rooms/'+this.props.roomID+'/messages';
       axios.get(url)
         .then(res => {
           //console.log(JSON.stringify(res.data))}
@@ -48,7 +51,7 @@ class RoomAPI extends React.Component {
           //   // posts.push(username : this.state.userName);
           // })
 
-          // console.log(posts)
+          console.log(posts)
           this.setState({
             posts
           });
@@ -79,7 +82,7 @@ class RoomAPI extends React.Component {
       this.socket.emit('client:message', messageObject);
       messageObject.fromMe = true; // Unneccessary??
       // Send another message to to MongoDB
-      let url='http://localhost:4200/api/rooms/'+this.props.roomID+'/messages';
+      let url=config.APIroot + 'rooms/'+this.props.roomID+'/messages';
       axios.post(url, {
           text: this.state.value,
           author_id: this.state.userID,
@@ -97,7 +100,7 @@ class RoomAPI extends React.Component {
     }
 
     setRoomName(roomID) {
-      axios.get('http://localhost:4200/api/rooms/'+roomID, {
+      axios.get(config.APIroot + 'rooms/'+roomID, {
         params: {
           id: roomID
         }
@@ -111,7 +114,7 @@ class RoomAPI extends React.Component {
     }
 
     setUserID(userName) {
-      axios.get('http://localhost:4200/api/user/'+userName)
+      axios.get(config.APIroot + 'user/'+userName)
       .then(res => {
         this.setState({userID: res.data._id});
       })

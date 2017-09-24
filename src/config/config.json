@@ -1,0 +1,6 @@
+{
+	"portIO": 4008,
+	"port": 4200,
+	"APIroot": "http://localhost:4200/api/",
+	"IOroot": "http://localhost:4008"
+}

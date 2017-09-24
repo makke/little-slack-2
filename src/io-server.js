@@ -6,8 +6,8 @@ const express = require("express");
 const cors = require("cors");
 const io = require("socket.io");
 
-// Implement later, put ports here:
-//import config from '../config/config.json';
+// Get ports from a config file
+const config = require("./config/config.json");
 
 // setup server
 const app = express();
@@ -23,12 +23,11 @@ app.get('/', (req, res) => {
   res.json({ message: 'Root of Socket.IO!' });
 });
 
-// Use environment defined port or 4200
-const port = process.env.PORT || 4008;
 
-// Start listening
-server.listen(process.env.PORT || 4008);
-console.log('Started on port ' + port);
+
+// Start to config port or 4008
+server.listen(config.portIO || 4008);
+console.log('SocketIO started on port ' + config.portIO);
 
 
 // Setup socket.io

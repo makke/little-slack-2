@@ -5,6 +5,7 @@ const Schema       = mongoose.Schema;
 const PrivmesSchema = new Schema({
  sender: { type: Schema.Types.ObjectId, ref: 'User' }, // is a username
  receiver: { type: Schema.Types.ObjectId, ref: 'User' }, // is a username
+ // add Date to get messages in right order ?
  text: String
 });
 

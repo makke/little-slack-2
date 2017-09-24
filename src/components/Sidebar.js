@@ -2,6 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 
+// Get ports from a config file
+const config = require("../config/config.json");
+
 class GetUsers extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +14,7 @@ class GetUsers extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:4200/api/${this.props.subwhat}`)
+    axios.get(config.APIroot + this.props.subwhat)
       .then(res => {
         const posts = Array.from(res.data);
         this.setState({
