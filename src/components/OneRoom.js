@@ -26,8 +26,10 @@ class RoomAPI extends React.Component {
       // Listen for socket.io messages from the server
       this.socket.on('server:message', message => {
         const posts = this.state.posts;
+        // Let's add a fake id only for <li key>
+        message._id = 'fake_'+(Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8));
         posts.push(message);
-        // console.log(posts);
+        console.log(posts);
         this.setState({ posts });
       });
     }
@@ -84,10 +86,12 @@ class RoomAPI extends React.Component {
           target: this.props.roomID
         })
         .then( data => {
-          // console.log(data.data.data)
+          let returnData = data.data.data;
+          returnData.author = {name: this.props.userName};
           this.setState({
-            posts: this.state.posts.concat(data.data.data) // also concat this.props.userName
+            posts: this.state.posts.concat(returnData)
           });
+          // console.log(this.state.posts)
         })
         .catch(err => console.log(err))
     }
