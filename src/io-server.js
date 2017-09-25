@@ -29,15 +29,19 @@ app.get('/', (req, res) => {
 server.listen(config.portIO || 4008);
 console.log('SocketIO started on port ' + config.portIO);
 
-
 // Setup socket.io
 socketIo.on('connection', socket => {
   // const username = socket.handshake.query.username;
   // console.log('connected');
 
-  socket.on('client:message', data => {
-    // message received from client, now broadcast it to everyone else
-    socket.broadcast.emit('server:message', data);
+  socket.on('room', function(room) {
+    socket.join(room);
+
+    socket.on('client:message', data => {
+      // message received from client, now broadcast it to everyone else
+      socket.broadcast.to(room).emit('server:message', data);
+    });
+
   });
 
   // socket.on('disconnect', () => {

@@ -18,6 +18,8 @@ class RoomAPI extends React.Component {
 
       // Connect to the socket.io server
       this.socket = io(config.IOroot).connect();
+      // Connect to the current room
+      this.socket.emit('room', this.props.roomID);
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
