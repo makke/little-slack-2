@@ -11,7 +11,7 @@ class Room extends React.Component {
     return (
     <Switch>
       <Route exact path='/rooms' component={AllRooms}/>
-      <Route path='/rooms/:number' render={(props) => <OneRoom {...this.props} {...props} />} />
+      <Route path='/rooms/:number' component={(props) => <OneRoom {...this.props} {...props} />} />
 
       { // TEST THIS:
       //   <Link

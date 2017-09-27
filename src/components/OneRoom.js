@@ -94,7 +94,8 @@ class RoomAPI extends React.Component {
           let returnData = data.data.data;
           returnData.author = {name: this.props.userName};
           this.setState({
-            posts: this.state.posts.concat(returnData)
+            posts: this.state.posts.concat(returnData),
+            value: ""
           });
           // console.log(this.state.posts)
         })

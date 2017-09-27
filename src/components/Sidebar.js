@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import axios from 'axios';
 
 // Get ports from a config file
@@ -35,7 +35,7 @@ class GetUsers extends React.Component {
             <li className="listHeader"><Link to={"/"+this.props.subwhat}>{this.props.subwhat}</Link></li>
             {
               this.state.posts.map(post =>
-              <li key={post._id}><Link to={"/"+this.props.subwhat+"/"+post._id}>{post.name}</Link></li>)
+              <li key={post._id}><NavLink to={"/"+this.props.subwhat+"/"+post._id}>{post.name}</NavLink></li>)
             }
           </ul>
 
